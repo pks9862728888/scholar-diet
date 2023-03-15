@@ -1,0 +1,15 @@
+.array {
+    padding: 1rem;
+}
+
+.array-size-input-group {
+    padding-bottom: 1rem;
+}
+
+.array-size-input {
+    margin-right: 1rem;
+    width: 3rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+}
