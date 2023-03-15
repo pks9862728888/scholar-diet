@@ -1,0 +1,19 @@
+<section name="array" class="array">
+    <div class="array-size-input-group">
+        <form [formGroup]="arraySizeForm" class="d-flex">
+            <input type="number" class="array-size-input"
+                    [placeholder]="maxSize"
+                    formControlName="maxSize"
+                    aria-label="Max array cells">
+            <button class="btn btn-outline-secondary" 
+                    type="button" 
+                    (click)="resizeArray()"
+                    [disabled]="arraySizeForm.invalid">Resize Array</button>
+        </form>
+        <small *ngIf="arraySizeForm.get('maxSize')?.errors"><em>Array size should be a valid number ({{ minSize }} - {{ maxAllowedSize }})</em></small>
+    </div>
+    <!-- Array cells -->
+    <array-cell *ngFor="let cellIdx of cellIdxList" 
+        [maxCells]="maxSize"
+        [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
+</section>
