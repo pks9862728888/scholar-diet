@@ -1,0 +1,27 @@
+.navbar-brand {
+    cursor: pointer;
+    z-index: 5;
+}
+
+.navbar {
+    background-color: #348d00;
+    box-shadow: 1px 1px 5px 1px #112e00;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    transform: translateY(-1px);
+}
+
+.scholar {
+    color: #ffd000;
+    text-shadow: 1px 1px #112e00;
+}
+
+.diet {
+    color: #ffffff;
+    text-shadow: 1px 1px #112e00;
+}

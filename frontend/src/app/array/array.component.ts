@@ -55,7 +55,7 @@ export class ArrayComponent implements OnInit{
   }
 
   getMaxPaddingInBothSidesOfArrayInPx() {
-    // 32 is added because inside this component in css 32 rem is added
+    // 32 is added because inside this component in css 32 px padding is added
     return this.maxPaddingInBothSidesInPx + 32;
   }
 }

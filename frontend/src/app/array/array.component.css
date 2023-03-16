@@ -9,7 +9,13 @@
 .array-size-input {
     margin-right: 1rem;
     width: 3rem;
-    border: 1px solid black;
+    border: 1px solid #333333;
     border-radius: 5px;
     text-align: center;
+    box-shadow: 1px 1px 3px 1px #808080;
+}
+
+.resize-btn {
+    border: 1px solid #333333;
+    box-shadow: 1px 1px 3px 1px #808080;
 }

@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArrayCellComponent } from './array-cell/array-cell.component';
 import { ArrayComponent } from './array/array.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArrayCellComponent,
-    ArrayComponent
+    ArrayComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
