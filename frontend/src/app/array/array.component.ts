@@ -13,8 +13,8 @@ interface ArrayControlI {
 })
 export class ArrayComponent implements OnInit{
 
-  minSize: number = 0;
-  maxSize: number = 0;
+  minIdx: number = 0;
+  maxIdx: number = 0;
   maxAllowedSize: number = 40;
   cellIdxList : number[] = [];
   arraySizeForm: FormGroup;
@@ -23,8 +23,8 @@ export class ArrayComponent implements OnInit{
   constructor(private fb: FormBuilder) {
     this.resetArray();
     this.arraySizeForm = this.fb.group({
-      maxSize: [this.maxSize, [Validators.required,
-        NumberValidators.range(this.minSize, this.maxAllowedSize)]]
+      maxSize: [this.maxIdx + 1, [Validators.required,
+        NumberValidators.range(this.minIdx + 1, this.maxAllowedSize)]]
     });
   }
 
@@ -32,11 +32,11 @@ export class ArrayComponent implements OnInit{
   }
 
   resetArray(): void {
-    this.minSize = 1;
-    this.maxSize = 5;
+    this.minIdx = 0;
+    this.maxIdx = 4;
     this.cellIdxList = [];
-    for (let i = this.minSize; i <= this.maxSize; i++) {
-      this.cellIdxList.push(i - 1);
+    for (let i = this.minIdx; i <= this.maxIdx; i++) {
+      this.cellIdxList.push(i);
     }
   }
 
@@ -44,12 +44,12 @@ export class ArrayComponent implements OnInit{
     if (this.arraySizeForm.valid) {
       // Create a temp list and copy the contents from old array to new array
       let tempCellidxList: number[] = [];
-      for (let i = 1; i <= this.arraySizeForm.get("maxSize")?.value; i++) {
-        tempCellidxList.push(i - 1);
+      for (let i = 0; i <= this.arraySizeForm.get("maxSize")?.value - 1; i++) {
+        tempCellidxList.push(i);
       }
 
       // Reset references
-      this.maxSize = this.arraySizeForm.get("maxSize")?.value;
+      this.maxIdx = this.arraySizeForm.get("maxSize")?.value - 1;
       this.cellIdxList = tempCellidxList;
     }
   }
@@ -57,5 +57,9 @@ export class ArrayComponent implements OnInit{
   getMaxPaddingInBothSidesOfArrayInPx() {
     // 32 is added because inside this component in css 32 px padding is added
     return this.maxPaddingInBothSidesInPx + 32;
+  }
+
+  getMaxCells() : number {
+    return this.maxIdx + 1;
   }
 }

@@ -1,8 +1,8 @@
 <section name="array" class="array">
-    <div class="array-size-input-group">
+    <div class="m-b-1rem">
         <form [formGroup]="arraySizeForm" class="d-flex">
             <input type="number" class="array-size-input"
-                    [placeholder]="maxSize"
+                    [placeholder]="maxIdx"
                     formControlName="maxSize"
                     aria-label="Max array cells">
             <button class="btn btn-warning resize-btn" 
@@ -10,10 +10,15 @@
                     (click)="resizeArray()"
                     [disabled]="arraySizeForm.invalid">Resize Array</button>
         </form>
-        <small *ngIf="arraySizeForm.get('maxSize')?.errors"><em>Array size should be a valid number ({{ minSize }} - {{ maxAllowedSize }})</em></small>
+        <small *ngIf="arraySizeForm.get('maxSize')?.errors"><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>
     </div>
     <!-- Array cells -->
-    <array-cell *ngFor="let cellIdx of cellIdxList" 
-        [maxCells]="maxSize"
+    <array-cell *ngFor="let cellIdx of cellIdxList"
+        [currIdx]="cellIdx"
+        [maxCells]="getMaxCells()"
         [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
+    <!-- Array slider -->
+    <div class="m-t-2rem">
+        <app-array-slider [minIdx]="minIdx" [maxIdx]="maxIdx"></app-array-slider>
+    </div>
 </section>

@@ -2,10 +2,6 @@
     padding: 1rem;
 }
 
-.array-size-input-group {
-    padding-bottom: 1rem;
-}
-
 .array-size-input {
     margin-right: 1rem;
     width: 3rem;
@@ -18,4 +14,12 @@
 .resize-btn {
     border: 1px solid #333333;
     box-shadow: 1px 1px 3px 1px #808080;
+}
+
+.m-t-2rem {
+    margin-top: 2rem;
+}
+
+.m-b-1rem {
+    margin-bottom: 1rem;
 }

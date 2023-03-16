@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ArrayCellComponent } from './array-cell/array-cell.component';
 import { ArrayComponent } from './array/array.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ArraySliderComponent } from './array-slider/array-slider.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArrayCellComponent,
     ArrayComponent,
-    NavbarComponent
+    NavbarComponent,
+    ArraySliderComponent
   ],
   imports: [
     BrowserModule,
