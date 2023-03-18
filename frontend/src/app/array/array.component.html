@@ -13,17 +13,14 @@
                     [disabled]="arraySizeForm.invalid || isArraySizeSame()">Resize Array</button>
         </form>
         <!-- Show or hide loop variable form  -->
-        <button class="btn btn-primary" type="button"
-            (click)="toggleAddLoopVariableFormVisibility()">
-            <span *ngIf="!showLoopVariableForm">Add Loop Variable</span>
-            <span *ngIf="showLoopVariableForm">Hide Add Loop Variable</span>
-        </button>
+        <button class="btn btn-primary" type="button" *ngIf="!showLoopVariableForm"
+            (click)="makeLoopVarFormVisible()">Add Loop Variable</button>
     </div>
     <div *ngIf="arraySizeForm.get('maxSize')?.errors" class="m-b-1rem">
         <small ><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>
     </div>
     <!-- Form for inserting loop control variables -->
-    <div *ngIf="showLoopVariableForm" class="m-b-1rem">
+    <div *ngIf="showLoopVariableForm" class="m-b-1rem loop-var-form">
         <form [formGroup]="loopVariableForm">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="loop-var-name" 
@@ -82,14 +79,14 @@
                   Is Loop Incrementing?
                 </label>
             </div>
-            <button class="btn btn-success resize-btn" 
-                type="button" 
+            <button class="btn btn-success" type="button" 
                 (click)="addLoopVariable()"
                 [disabled]="loopVariableForm.invalid">Add</button>
-            <button class="btn btn-warning resize-btn" 
-                type="button" 
+            <button class="btn btn-warning" type="button" 
                 (click)="resetAddLoopVariableFrom()"
                 [disabled]="loopVariableForm.pristine">Reset</button>
+            <button class="btn btn-danger" type="button" 
+                (click)="hideLoopVariableForm()">Cancel</button>
         </form>
     </div>
     <!-- Array cells -->

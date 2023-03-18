@@ -19,6 +19,11 @@
 }
 
 /* Array loop controls styling */
+.loop-var-form {
+    padding: 1rem;
+    border: 1px dashed #333333;
+}
+
 .loop-var-name-input {
     margin-right: 1rem;
     width: 10rem;

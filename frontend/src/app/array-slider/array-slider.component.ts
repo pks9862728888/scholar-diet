@@ -76,8 +76,9 @@ export class ArraySliderComponent implements OnInit {
     this.showAddVariableForm = true;
   }
 
-  hideAddTrackingVariableFrom() : void {
+  hideAddLocalVariableFrom() : void {
     this.showAddVariableForm = false;
+    this.addVariableForm.reset();
   }
 
   addLoopVariable() : void {
@@ -96,7 +97,7 @@ export class ArraySliderComponent implements OnInit {
         value: ''
       });
       console.log(this.variableList);
-      this.hideAddTrackingVariableFrom();
+      this.hideAddLocalVariableFrom();
       this.addVariableForm.reset();
     }
   }

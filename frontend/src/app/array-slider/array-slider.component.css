@@ -2,6 +2,21 @@
     width: 100%;
 }
 
+input[type=range]::-webkit-slider-runnable-track {
+    background: #a5a5a5;
+    border-radius: 25px;
+    height: 1rem;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #a6a7a5;
+}
+
+.slider-section {
+    padding: 0.5rem;
+    border: 1px dashed #353535;
+}
+
 /* Array loop increment / decrement controls styling */
 .active-button {
     background-color: #9ec787;
@@ -30,6 +45,12 @@
 
 .icon {
     border: 1px solid #3d3d3d;
+}
+
+/* Add variable form styling */
+.add-var-form {
+    padding: 1rem;
+    border: 1px dashed #3d3d3d;
 }
 
 /* Array local variables additional controls styling */

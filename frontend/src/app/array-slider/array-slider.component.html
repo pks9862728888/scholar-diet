@@ -1,74 +1,76 @@
-<input type="range" class="slider" 
-    [disabled]="true"
-    [min]="minIdx" 
-    [max]="getMaxSize()" 
-    [(ngModel)]="stepIdx"
-    required>
-<div class="d-flex m-b-1rem">
-    <div class="me-auto">
-        <!-- Show for loop -->
-        <span>for ({{ name }} = {{ stepIdx }}; 
-            {{ name }} {{ isLoopIncrementing ? "<=" : ">=" }} {{ validStepEndIdx }}; 
-            {{ name }} {{ isLoopIncrementing ? "+=" : "-=" }} {{ stepBy }}) 
-        {{ '{' }}{{ '}' }}
-        </span>
-        <!-- Controls for incrementing or decrementing loop -->
-        <button (click)="increment()" [disabled]="isOutOfBounds(true)" 
-                class="inc-dec-btn m-r-1rem m-l-0_5rem" [ngClass]="{'active-button' : isLoopIncrementing}">
-            {{ name }} += {{ stepBy }}
-        </button>
-        <button (click)="decrement()" [disabled]="isOutOfBounds(false)" 
-                class="inc-dec-btn m-r-1rem" [ngClass]="{'active-button' : !isLoopIncrementing}">
-            {{ name }} -= {{ stepBy }}
-        </button>
-        <!-- Show status if loop is active or terminated -->
-        <span class="badge bg-success" *ngIf="!isLoopIndexOutOfBounds()">Is Active</span>
-        <span class="badge bg-secondary" *ngIf="isLoopIndexOutOfBounds()">Is Terminated</span>
-    </div>
-    <div>
-        <button class="icon m-r-0_5rem" (click)="showAddTrackingVariableFrom()"
-            *ngIf="!showAddVariableForm">
-            <fa-icon icon="plus-circle" class="add-icon"></fa-icon>
-        </button>
-        <button class="icon" (click)="deleteSlider()">
-            <fa-icon icon="trash" class="delete-icon"></fa-icon>
-        </button>
-    </div>
-</div>
-<!-- Show add variable form -->
-<div *ngIf="showAddVariableForm" class="m-b-1rem">
-    <form [formGroup]="addVariableForm">
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="local-var-name" 
-                aria-label="Variable Name"
-                formControlName="name">
-            <label for="local-var-name">Local Variable Name</label>
-            <small *ngIf="addVariableForm.get('name')?.errors?.['minLength'] && 
-                            !addVariableForm.get('name')?.pristine">
-                <em>Variable name should be at least 1 character long</em>
-            </small>
-            <small *ngIf="addVariableForm.get('name')?.errors?.['invalidVariableName'] && 
-                            !addVariableForm.get('name')?.pristine">
-                <em>Variable name should not start with digit</em>
-            </small>
-            <small *ngIf="addVariableForm.get('name')?.errors?.['duplicateVariableName']">
-                <em>{{ addVariableForm.get('name')?.getError('duplicateVariableName') }}</em>
-            </small>
+<section class="slider-section">
+    <input type="range" class="slider m-b-1rem" 
+        [min]="minIdx" 
+        [max]="getMaxSize()" 
+        [(ngModel)]="stepIdx"
+        [disabled]="true"
+        required>
+    <div class="d-flex m-b-1rem">
+        <div class="me-auto">
+            <!-- Show for loop -->
+            <span>for ({{ name }} = {{ stepIdx }}; 
+                {{ name }} {{ isLoopIncrementing ? "<=" : ">=" }} {{ validStepEndIdx }}; 
+                {{ name }} {{ isLoopIncrementing ? "+=" : "-=" }} {{ stepBy }}) 
+            {{ '{' }}{{ '}' }}
+            </span>
+            <!-- Controls for incrementing or decrementing loop -->
+            <button (click)="increment()" [disabled]="isOutOfBounds(true)" 
+                    class="inc-dec-btn m-r-1rem m-l-0_5rem" [ngClass]="{'active-button' : isLoopIncrementing}">
+                {{ name }} += {{ stepBy }}
+            </button>
+            <button (click)="decrement()" [disabled]="isOutOfBounds(false)" 
+                    class="inc-dec-btn m-r-1rem" [ngClass]="{'active-button' : !isLoopIncrementing}">
+                {{ name }} -= {{ stepBy }}
+            </button>
+            <!-- Show status if loop is active or terminated -->
+            <span class="badge bg-success" *ngIf="!isLoopIndexOutOfBounds()">Is Active</span>
+            <span class="badge bg-secondary" *ngIf="isLoopIndexOutOfBounds()">Is Terminated</span>
         </div>
         <div>
-            <button class="btn btn-primary m-r-0_5rem" (click)="addLoopVariable()"
-                [disabled]="addVariableForm.invalid">Add</button>
-            <button class="btn btn-warning" (click)="hideAddTrackingVariableFrom()">Cancel</button>
+            <button class="icon m-r-0_5rem" (click)="showAddTrackingVariableFrom()"
+                *ngIf="!showAddVariableForm">
+                <fa-icon icon="plus-circle" class="add-icon"></fa-icon>
+            </button>
+            <button class="icon" (click)="deleteSlider()">
+                <fa-icon icon="trash" class="delete-icon"></fa-icon>
+            </button>
         </div>
-    </form>
-</div>
-<!-- Show the variables for tracking -->
-<div class="d-flex">
-    <div class="var-div m-r-1rem" *ngFor="let variable of variableList">
-        <span class="var-name">{{ variable.name }} = </span>
-        <input type="text" class="var-value m-r-0_5rem" [id]="variable.name" [(ngModel)]="variable.value">
-        <button class="icon" (click)="deleteVariable(variable)">
-            <fa-icon icon="trash" class="delete-icon"></fa-icon>
-        </button>
     </div>
-</div>
+    <!-- Add variable form -->
+    <div *ngIf="showAddVariableForm" class="m-b-1rem add-var-form">
+        <form [formGroup]="addVariableForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="local-var-name" 
+                    aria-label="Variable Name"
+                    formControlName="name">
+                <label for="local-var-name">Local Variable Name</label>
+                <small *ngIf="addVariableForm.get('name')?.errors?.['minLength'] && 
+                                !addVariableForm.get('name')?.pristine">
+                    <em>Variable name should be at least 1 character long</em>
+                </small>
+                <small *ngIf="addVariableForm.get('name')?.errors?.['invalidVariableName'] && 
+                                !addVariableForm.get('name')?.pristine">
+                    <em>Variable name should not start with digit</em>
+                </small>
+                <small *ngIf="addVariableForm.get('name')?.errors?.['duplicateVariableName']">
+                    <em>{{ addVariableForm.get('name')?.getError('duplicateVariableName') }}</em>
+                </small>
+            </div>
+            <div>
+                <button class="btn btn-primary m-r-0_5rem" (click)="addLoopVariable()"
+                    [disabled]="addVariableForm.invalid">Add</button>
+                <button class="btn btn-warning" (click)="hideAddLocalVariableFrom()">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <!-- Show the local variables -->
+    <div class="d-flex m-b-1rem">
+        <div class="var-div m-r-1rem" *ngFor="let variable of variableList">
+            <span class="var-name">{{ variable.name }} = </span>
+            <input type="text" class="var-value m-r-0_5rem" [id]="variable.name" [(ngModel)]="variable.value">
+            <button class="icon" (click)="deleteVariable(variable)">
+                <fa-icon icon="trash" class="delete-icon"></fa-icon>
+            </button>
+        </div>
+    </div>
+</section>

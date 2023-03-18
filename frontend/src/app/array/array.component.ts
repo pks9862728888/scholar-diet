@@ -116,7 +116,7 @@ export class ArrayComponent {
         isLoopIncrementing: this.loopVariableForm.get('isLoopIncrementing')?.value
       });
       this.resetAddLoopVariableFrom();
-      this.toggleAddLoopVariableFormVisibility();
+      this.hideLoopVariableForm();
     }
   }
 
@@ -139,7 +139,12 @@ export class ArrayComponent {
     return this.maxIdx + 1;
   }
 
-  toggleAddLoopVariableFormVisibility(): void {
-    this.showLoopVariableForm = !this.showLoopVariableForm;
+  makeLoopVarFormVisible(): void {
+    this.showLoopVariableForm = true;
+  }
+
+  hideLoopVariableForm(): void {
+    this.showLoopVariableForm = false;
+    this.resetAddLoopVariableFrom();
   }
 }
