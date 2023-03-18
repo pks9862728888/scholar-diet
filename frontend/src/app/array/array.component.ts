@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArraySliderDataInterface } from '../array-slider/ArraySliderDataInterface';
+import { NameValidators } from '../form-field-validators/NameValidators';
 import { NumberValidators } from '../form-field-validators/NumberValidators';
 
 interface ArrayControlI {
@@ -36,7 +37,7 @@ export class ArrayComponent {
         NumberValidators.range(this.minIdx + 1, this.maxAllowedSize)]]
     });
     this.loopVariableForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(1)]],
+      name: ['', [Validators.required, Validators.minLength(1), NameValidators.validateVariableName()]],
       startIdx: [this.minIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx + 1)]],
       endIdx: [this.maxIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx + 1)]],
       stepBy: [1, [Validators.required, Validators.min(0)]],
@@ -97,16 +98,24 @@ export class ArrayComponent {
   }
 
   addLoopVariable() {
-    this.arraySliderList.push({
-      name: this.loopVariableForm.get('name')?.value,
-      minIdx: this.minIdx,
-      maxIdx: this.maxIdx,
-      stepBy: this.loopVariableForm.get('stepBy')?.value,
-      validStepStartIdx: this.loopVariableForm.get('startIdx')?.value,
-      validStepEndIdx: this.loopVariableForm.get('endIdx')?.value,
-      isLoopIncrementing: this.loopVariableForm.get('isLoopIncrementing')?.value
-    });
-    this.resetAddLoopVariableFrom();
-    this.toggleAddLoopVariableFormVisibility();
+    // Validate if loop variable is not duplicate
+    let loopVarName : string = this.loopVariableForm.get('name')?.value;
+    if (this.arraySliderList.findIndex(s => s.name === loopVarName) != -1) {
+      this.loopVariableForm.get('name')?.setErrors(
+        { 'duplicateVariableName' : 'Another loop exists with same variable name: ' + loopVarName });
+    } else {
+      // Not duplicate, so add arraySlider
+      this.arraySliderList.push({
+        name: this.loopVariableForm.get('name')?.value,
+        minIdx: this.minIdx,
+        maxIdx: this.maxIdx,
+        stepBy: this.loopVariableForm.get('stepBy')?.value,
+        validStepStartIdx: this.loopVariableForm.get('startIdx')?.value,
+        validStepEndIdx: this.loopVariableForm.get('endIdx')?.value,
+        isLoopIncrementing: this.loopVariableForm.get('isLoopIncrementing')?.value
+      });
+      this.resetAddLoopVariableFrom();
+      this.toggleAddLoopVariableFormVisibility();
+    }
   }
 }

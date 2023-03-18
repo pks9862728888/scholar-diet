@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+.active-button {
+    background-color: #9ec787;
+}
+
 .inc-dec-btn:disabled {
     border: 1px solid #d1d1d1;
 }
@@ -12,7 +16,6 @@
 }
 
 .inc-dec-btn:hover:not([disabled]) {
-    /* border: 2px solid #000000; */
     background-color: #82c55a;
 }
 

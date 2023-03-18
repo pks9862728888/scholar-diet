@@ -44,6 +44,11 @@ export class ArraySliderComponent implements OnInit {
       this.stepIdx < this.validStepStartIdx;
   }
 
+  isLoopIndexOutOfBounds() : boolean {
+    return this.isLoopIncrementing ? this.isInValidIncrementingStepIdx(this.stepIdx) :
+      this.isInValidDecrementingStepIdx(this.stepIdx);
+  }
+
   isInValidIncrementingStepIdx(currentStepIdx: number) : boolean {
     var res = !(currentStepIdx >= this.validStepStartIdx && currentStepIdx <= this.validStepEndIdx);
     return res;

@@ -27,9 +27,16 @@
                     aria-label="Loop Variable Name"
                     formControlName="name">
                 <label for="loop-var-name">Loop Variable Name</label>
-                <small *ngIf="loopVariableForm.get('name')?.errors && 
+                <small *ngIf="loopVariableForm.get('name')?.errors?.['minLength'] && 
                                 !loopVariableForm.get('name')?.pristine">
                     <em>Loop control variable name should be at least 1 character long</em>
+                </small>
+                <small *ngIf="loopVariableForm.get('name')?.errors?.['invalidVariableName'] && 
+                                !loopVariableForm.get('name')?.pristine">
+                    <em>Loop control variable name should not start with digit</em>
+                </small>
+                <small *ngIf="loopVariableForm.get('name')?.errors?.['duplicateVariableName']">
+                    <em>{{ loopVariableForm.get('name')?.getError('duplicateVariableName') }}</em>
                 </small>
             </div>
             <div class="form-floating mb-3">
@@ -71,7 +78,7 @@
                 <label class="form-check-label" for="loop-type">
                   Is Loop Incrementing?
                 </label>
-              </div>
+            </div>
             <button class="btn btn-success resize-btn" 
                 type="button" 
                 (click)="addLoopVariable()"

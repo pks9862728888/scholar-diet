@@ -5,14 +5,22 @@
     [(ngModel)]="stepIdx"
     required>
 <div>
-    for ({{ name }} = {{ stepIdx }}; 
+    <!-- Show for loop -->
+    <span>for ({{ name }} = {{ stepIdx }}; 
         {{ name }} {{ isLoopIncrementing ? "<=" : ">=" }} {{ validStepEndIdx }}; 
         {{ name }} {{ isLoopIncrementing ? "+=" : "-=" }} {{ stepBy }}) 
     {{ '{' }}{{ '}' }}
-    <button (click)="increment()" [disabled]="isOutOfBounds(true)" class="inc-dec-btn m-r-1rem m-l-0_5rem">
+    </span>
+    <!-- Controls for incrementing or decrementing loop -->
+    <button (click)="increment()" [disabled]="isOutOfBounds(true)" 
+            class="inc-dec-btn m-r-1rem m-l-0_5rem" [ngClass]="{'active-button' : isLoopIncrementing}">
         {{ name }} += {{ stepBy }}
     </button>
-    <button (click)="decrement()" [disabled]="isOutOfBounds(false)" class="inc-dec-btn">
+    <button (click)="decrement()" [disabled]="isOutOfBounds(false)" 
+            class="inc-dec-btn m-r-1rem" [ngClass]="{'active-button' : !isLoopIncrementing}">
         {{ name }} -= {{ stepBy }}
     </button>
+    <!-- Show status if loop is active or terminated -->
+    <span class="badge bg-success" *ngIf="!isLoopIndexOutOfBounds()">Is Active</span>
+    <span class="badge bg-secondary" *ngIf="isLoopIndexOutOfBounds()">Is Terminated</span>
 </div>
