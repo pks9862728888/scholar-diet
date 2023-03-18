@@ -1,19 +1,111 @@
 <section name="array" class="array">
-    <div class="array-size-input-group">
+    <div class="d-flex" [ngClass]="{'m-b-1rem' : !arraySizeForm.get('maxSize')?.errors,
+                                    'm-b-0_5rem' : arraySizeForm.get('maxSize')?.errors}">
+        <!-- Form for resizing array -->
         <form [formGroup]="arraySizeForm" class="d-flex">
             <input type="number" class="array-size-input"
-                    [placeholder]="maxSize"
+                    [placeholder]="maxIdx"
                     formControlName="maxSize"
                     aria-label="Max array cells">
-            <button class="btn btn-outline-secondary" 
+            <button class="btn btn-warning" 
                     type="button" 
                     (click)="resizeArray()"
-                    [disabled]="arraySizeForm.invalid">Resize Array</button>
+                    [disabled]="arraySizeForm.invalid || isArraySizeSame()">Resize Array</button>
         </form>
-        <small *ngIf="arraySizeForm.get('maxSize')?.errors"><em>Array size should be a valid number ({{ minSize }} - {{ maxAllowedSize }})</em></small>
+        <!-- Show or hide loop variable form  -->
+        <button class="btn btn-primary" type="button"
+            (click)="toggleAddLoopVariableFormVisibility()">
+            <span *ngIf="!showLoopVariableForm">Add Loop Variable</span>
+            <span *ngIf="showLoopVariableForm">Hide Add Loop Variable</span>
+        </button>
+    </div>
+    <div *ngIf="arraySizeForm.get('maxSize')?.errors" class="m-b-1rem">
+        <small ><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>
+    </div>
+    <!-- Form for inserting loop control variables -->
+    <div *ngIf="showLoopVariableForm" class="m-b-1rem">
+        <form [formGroup]="loopVariableForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="loop-var-name" 
+                    aria-label="Loop Variable Name"
+                    formControlName="name">
+                <label for="loop-var-name">Loop Variable Name</label>
+                <small *ngIf="loopVariableForm.get('name')?.errors?.['minLength'] && 
+                                !loopVariableForm.get('name')?.pristine">
+                    <em>Loop control variable name should be at least 1 character long</em>
+                </small>
+                <small *ngIf="loopVariableForm.get('name')?.errors?.['invalidVariableName'] && 
+                                !loopVariableForm.get('name')?.pristine">
+                    <em>Loop control variable name should not start with digit</em>
+                </small>
+                <small *ngIf="loopVariableForm.get('name')?.errors?.['duplicateVariableName']">
+                    <em>{{ loopVariableForm.get('name')?.getError('duplicateVariableName') }}</em>
+                </small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="loop-start-idx" min="0"
+                    aria-label="Loop Start Idx"
+                    formControlName="startIdx">
+                <label for="loop-start-idx">Loop Start Idx</label>
+                <small *ngIf="loopVariableForm.get('startIdx')?.errors && 
+                                !loopVariableForm.get('startIdx')?.pristine">
+                    <em>Loop var start index should be a valid number ({{ minIdx }} - {{ maxIdx + 1 }})</em>
+                </small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="loop-end-idx" min="0"
+                    aria-label="Loop End Idx"
+                    formControlName="endIdx">
+                <label for="loop-end-idx">Loop End Idx</label>
+                <small *ngIf="loopVariableForm.get('endIdx')?.errors && 
+                                !loopVariableForm.get('endIdx')?.pristine">
+                    <em>Loop var end index should be a valid number ({{ minIdx }} - {{ maxIdx + 1 }})</em>
+                </small>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="step-idx" min="0"
+                    aria-label="Increment / Decrement"
+                    formControlName="stepBy">
+                <label for="step-idx">
+                    <span *ngIf="isLoopIncrementing()">Increment</span>
+                    <span *ngIf="!isLoopIncrementing()">Decrement</span> By</label>
+                <small *ngIf="loopVariableForm.get('stepBy')?.errors && 
+                                !loopVariableForm.get('stepBy')?.pristine">
+                    <em>Should be a valid number >= 0</em>
+                </small>
+            </div>
+            <div class="form-check m-b-1rem">
+                <input class="form-check-input" type="checkbox" id="loop-type"
+                    [value]="loopVariableForm.get('isLoopIncrementing')"
+                    formControlName="isLoopIncrementing">
+                <label class="form-check-label" for="loop-type">
+                  Is Loop Incrementing?
+                </label>
+            </div>
+            <button class="btn btn-success resize-btn" 
+                type="button" 
+                (click)="addLoopVariable()"
+                [disabled]="loopVariableForm.invalid">Add</button>
+            <button class="btn btn-warning resize-btn" 
+                type="button" 
+                (click)="resetAddLoopVariableFrom()"
+                [disabled]="loopVariableForm.pristine">Reset</button>
+        </form>
     </div>
     <!-- Array cells -->
-    <array-cell *ngFor="let cellIdx of cellIdxList" 
-        [maxCells]="maxSize"
+    <array-cell *ngFor="let cellIdx of cellIdxList"
+        [currIdx]="cellIdx"
+        [maxCells]="getArraySize()"
         [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
+    <!-- Array slider -->
+    <div class="m-t-2rem" *ngFor="let slider of arraySliderList">
+        <app-array-slider [name]="slider.name" 
+                          [minIdx]="slider.minIdx"
+                          [maxIdx]="slider.maxIdx"
+                          [stepBy]="slider.stepBy"
+                          [validStepStartIdx]="slider.validStepStartIdx"
+                          [validStepEndIdx]="slider.validStepEndIdx"
+                          [isLoopIncrementing]="slider.isLoopIncrementing"
+                          (deleteSliderEventEmitter)="deleteSlider(slider)"></app-array-slider>
+    </div>
 </section>

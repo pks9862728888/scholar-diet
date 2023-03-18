@@ -6,20 +6,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ArrayCellComponent } from './array-cell/array-cell.component';
 import { ArrayComponent } from './array/array.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ArraySliderComponent } from './array-slider/array-slider.component';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArrayCellComponent,
-    ArrayComponent
+    ArrayComponent,
+    NavbarComponent,
+    ArraySliderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(faLibrary: FaIconLibrary) {
+    faLibrary.addIcons(faTrash);
+  }
+}

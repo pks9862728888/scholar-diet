@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ArrayCellComponent implements OnInit {
 
   data: string = "";
+  @Input() currIdx: number = 0;
   @Input() maxCells: number = 0;
   @Input() maxPaddingForArrayInBothSidesInPx: number = 0;
 
