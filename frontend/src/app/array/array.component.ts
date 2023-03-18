@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ArraySliderDataInterface } from '../array-slider/ArraySliderDataInterface';
 import { NameValidators } from '../form-field-validators/NameValidators';
 import { NumberValidators } from '../form-field-validators/NumberValidators';
@@ -72,14 +72,23 @@ export class ArrayComponent {
       let oldSize = this.getArraySize();
 
       // Create a temp list and copy the contents from old array to new array
-      let tempCellidxList: number[] = [];
+      let tempCellIdxList: number[] = [];
       for (let i = 0; i <= newSize - 1; i++) {
-        tempCellidxList.push(i);
+        tempCellIdxList.push(i);
       }
 
       // Reset references
       this.maxIdx = newSize - 1;
-      this.cellIdxList = tempCellidxList;
+      this.cellIdxList = tempCellIdxList;
+
+      // Update add loop variable form with updated value and validator
+      this.loopVariableForm.patchValue({
+        'endIdx': [newSize]
+      });
+      let endIdxFormControl = this.loopVariableForm.get('endIdx');
+      endIdxFormControl?.clearValidators();
+      endIdxFormControl?.addValidators(Validators.required);
+      endIdxFormControl?.addValidators(NumberValidators.range(this.minIdx, this.maxIdx + 1));
 
       // If newSize is > old size then update max value of slider to new size, 
       // else clear all sliders (loop variables)
