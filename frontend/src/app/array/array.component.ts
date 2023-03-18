@@ -31,7 +31,7 @@ export class ArrayComponent {
   arraySliderList: ArraySliderDataInterface[] = [];
 
   constructor(private fb: FormBuilder) {
-    this.resetArray();
+    this.initArrayWithDefaultValues();
     this.arraySizeForm = this.fb.group({
       maxSize: [this.maxIdx + 1, [Validators.required,
         NumberValidators.range(this.minIdx + 1, this.maxAllowedSize)]]
@@ -57,11 +57,7 @@ export class ArrayComponent {
     });
   }
 
-  isLoopIncrementing() : boolean {
-    return this.loopVariableForm.get('isLoopIncrementing')?.value;
-  }
-
-  resetArray(): void {
+  initArrayWithDefaultValues(): void {
     this.minIdx = 0;
     this.maxIdx = 4;
     this.cellIdxList = [];
@@ -72,29 +68,34 @@ export class ArrayComponent {
 
   resizeArray(): void {
     if (this.arraySizeForm.valid) {
+      let newSize = this.arraySizeForm.get("maxSize")?.value;
+      let oldSize = this.getArraySize();
+
       // Create a temp list and copy the contents from old array to new array
       let tempCellidxList: number[] = [];
-      for (let i = 0; i <= this.arraySizeForm.get("maxSize")?.value - 1; i++) {
+      for (let i = 0; i <= newSize - 1; i++) {
         tempCellidxList.push(i);
       }
 
       // Reset references
-      this.maxIdx = this.arraySizeForm.get("maxSize")?.value - 1;
+      this.maxIdx = newSize - 1;
       this.cellIdxList = tempCellidxList;
+
+      // If newSize is > old size then update max value of slider to new size, 
+      // else clear all sliders (loop variables)
+      if (newSize > oldSize) {
+        for (let slider of this.arraySliderList) {
+          slider.maxIdx = newSize - 1;
+        }
+      } else if (newSize < oldSize) {
+        this.arraySliderList = [];
+      }
     }
   }
 
   getMaxPaddingInBothSidesOfArrayInPx() {
     // 32 is added because inside this component in css 32 px padding is added
     return this.maxPaddingInBothSidesInPx + 32;
-  }
-
-  getMaxCells() : number {
-    return this.maxIdx + 1;
-  }
-
-  toggleAddLoopVariableFormVisibility(): void {
-    this.showLoopVariableForm = !this.showLoopVariableForm;
   }
 
   addLoopVariable() {
@@ -117,5 +118,21 @@ export class ArrayComponent {
       this.resetAddLoopVariableFrom();
       this.toggleAddLoopVariableFormVisibility();
     }
+  }
+
+  isLoopIncrementing() : boolean {
+    return this.loopVariableForm.get('isLoopIncrementing')?.value;
+  }
+
+  isArraySizeSame(): boolean {
+    return this.arraySizeForm.get("maxSize")?.value == this.getArraySize();
+  }
+
+  getArraySize() : number {
+    return this.maxIdx + 1;
+  }
+
+  toggleAddLoopVariableFormVisibility(): void {
+    this.showLoopVariableForm = !this.showLoopVariableForm;
   }
 }

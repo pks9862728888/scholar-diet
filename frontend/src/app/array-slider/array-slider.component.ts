@@ -15,14 +15,12 @@ export class ArraySliderComponent implements OnInit {
   @Input() validStepEndIdx: number = 0;
   @Input() isLoopIncrementing: boolean = true;
   stepIdx: number = 0;
-  validCurrStepIdx: number = 0;
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.stepIdx = this.validStepStartIdx;
-    this.validCurrStepIdx = this.stepIdx;
   }
 
   getMaxSize() {

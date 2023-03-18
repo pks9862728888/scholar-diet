@@ -1,5 +1,6 @@
 <section name="array" class="array">
-    <div class="m-b-1rem d-flex">
+    <div class="d-flex" [ngClass]="{'m-b-1rem' : !arraySizeForm.get('maxSize')?.errors,
+                                    'm-b-0_5rem' : arraySizeForm.get('maxSize')?.errors}">
         <!-- Form for resizing array -->
         <form [formGroup]="arraySizeForm" class="d-flex">
             <input type="number" class="array-size-input"
@@ -9,7 +10,7 @@
             <button class="btn btn-warning" 
                     type="button" 
                     (click)="resizeArray()"
-                    [disabled]="arraySizeForm.invalid">Resize Array</button>
+                    [disabled]="arraySizeForm.invalid || isArraySizeSame()">Resize Array</button>
         </form>
         <!-- Show or hide loop variable form  -->
         <button class="btn btn-primary" type="button"
@@ -17,7 +18,9 @@
             <span *ngIf="!showLoopVariableForm">Add Loop Variable</span>
             <span *ngIf="showLoopVariableForm">Hide Add Loop Variable</span>
         </button>
-        <small *ngIf="arraySizeForm.get('maxSize')?.errors"><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>
+    </div>
+    <div *ngIf="arraySizeForm.get('maxSize')?.errors" class="m-b-1rem">
+        <small ><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>
     </div>
     <!-- Form for inserting loop control variables -->
     <div *ngIf="showLoopVariableForm" class="m-b-1rem">
@@ -92,7 +95,7 @@
     <!-- Array cells -->
     <array-cell *ngFor="let cellIdx of cellIdxList"
         [currIdx]="cellIdx"
-        [maxCells]="getMaxCells()"
+        [maxCells]="getArraySize()"
         [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
     <!-- Array slider -->
     <div class="m-t-2rem" *ngFor="let slider of arraySliderList">
