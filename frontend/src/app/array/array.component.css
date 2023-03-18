@@ -2,6 +2,10 @@
     padding: 1rem;
 }
 
+.array-cells {
+    padding: 0.5rem;
+}
+
 /* Array size control styling */
 .array-size-input {
     margin-right: 1rem;

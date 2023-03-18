@@ -90,10 +90,12 @@
         </form>
     </div>
     <!-- Array cells -->
-    <array-cell *ngFor="let cellIdx of cellIdxList"
-        [currIdx]="cellIdx"
-        [maxCells]="getArraySize()"
-        [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
+    <div class="array-cells">
+        <array-cell *ngFor="let cellIdx of cellIdxList"
+            [currIdx]="cellIdx"
+            [maxCells]="getArraySize()"
+            [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
+    </div>
     <!-- Array slider -->
     <div class="m-t-2rem" *ngFor="let slider of arraySliderList">
         <app-array-slider [name]="slider.name" 

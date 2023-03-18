@@ -103,8 +103,9 @@ export class ArrayComponent {
   }
 
   getMaxPaddingInBothSidesOfArrayInPx() {
-    // 32 is added because inside this component in css 32 px padding is added
-    return this.maxPaddingInBothSidesInPx + 32;
+    // 32 is added because inside this component in css 1 rem (both side) + 0.5 rem (both side) 
+    // padding is added
+    return this.maxPaddingInBothSidesInPx + 32 + 16;
   }
 
   addLoopVariable() {
