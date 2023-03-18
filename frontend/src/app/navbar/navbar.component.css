@@ -5,7 +5,8 @@
 
 .navbar {
     background-color: #348d00;
-    box-shadow: 1px 1px 5px 1px #112e00;
+    z-index: 4;
+    box-shadow: 1px 1px 3px 1px #112e00;
 }
 
 .navbar-brand {

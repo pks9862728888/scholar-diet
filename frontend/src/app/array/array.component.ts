@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ArraySliderDataInterface } from '../array-slider/ArraySliderDataInterface';
 import { NumberValidators } from '../form-field-validators/NumberValidators';
 
 interface ArrayControlI {
@@ -11,8 +12,9 @@ interface ArrayControlI {
   templateUrl: './array.component.html',
   styleUrls: ['./array.component.css']
 })
-export class ArrayComponent implements OnInit{
+export class ArrayComponent {
 
+  // Controls for controlling array size
   minIdx: number = 0;
   maxIdx: number = 0;
   maxAllowedSize: number = 40;
@@ -20,15 +22,42 @@ export class ArrayComponent implements OnInit{
   arraySizeForm: FormGroup;
   @Input() maxPaddingInBothSidesInPx = 0;
 
+  // Controls for adding and deleting loops
+  showLoopVariableForm: boolean = false;
+  loopVariableForm: FormGroup;
+
+  // Loop controls
+  arraySliderList: ArraySliderDataInterface[] = [];
+
   constructor(private fb: FormBuilder) {
     this.resetArray();
     this.arraySizeForm = this.fb.group({
       maxSize: [this.maxIdx + 1, [Validators.required,
         NumberValidators.range(this.minIdx + 1, this.maxAllowedSize)]]
     });
+    this.loopVariableForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(1)]],
+      startIdx: [this.minIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx + 1)]],
+      endIdx: [this.maxIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx + 1)]],
+      stepBy: [1, [Validators.required, Validators.min(0)]],
+      isLoopIncrementing: [true, [Validators.required]]
+    });
+    this.resetAddLoopVariableFrom();
   }
 
-  ngOnInit(): void {
+  resetAddLoopVariableFrom() {
+    this.loopVariableForm.reset();
+    this.loopVariableForm.patchValue({
+      name: '',
+      startIdx: this.minIdx,
+      endIdx: this.maxIdx,
+      stepBy: 1,
+      isLoopIncrementing: true
+    });
+  }
+
+  isLoopIncrementing() : boolean {
+    return this.loopVariableForm.get('isLoopIncrementing')?.value;
   }
 
   resetArray(): void {
@@ -61,5 +90,23 @@ export class ArrayComponent implements OnInit{
 
   getMaxCells() : number {
     return this.maxIdx + 1;
+  }
+
+  toggleAddLoopVariableFormVisibility(): void {
+    this.showLoopVariableForm = !this.showLoopVariableForm;
+  }
+
+  addLoopVariable() {
+    this.arraySliderList.push({
+      name: this.loopVariableForm.get('name')?.value,
+      minIdx: this.minIdx,
+      maxIdx: this.maxIdx,
+      stepBy: this.loopVariableForm.get('stepBy')?.value,
+      validStepStartIdx: this.loopVariableForm.get('startIdx')?.value,
+      validStepEndIdx: this.loopVariableForm.get('endIdx')?.value,
+      isLoopIncrementing: this.loopVariableForm.get('isLoopIncrementing')?.value
+    });
+    this.resetAddLoopVariableFrom();
+    this.toggleAddLoopVariableFormVisibility();
   }
 }

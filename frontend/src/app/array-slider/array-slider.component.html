@@ -1,9 +1,13 @@
 <input type="range" class="slider" 
     [min]="minIdx" 
     [max]="getMaxSize()" 
-    step="1"
+    [step]="stepBy"
     [(ngModel)]="stepIdx"
+    (change)="updateStepIdx(stepIdx)"
     required>
 <div>
-    {{stepIdx}}
+    for ({{name}} = {{ validCurrStepIdx }}; 
+        {{name}} {{ isLoopIncrementing ? "<=" : ">=" }} {{ validStepEndIdx}}; 
+        {{name}} {{ isLoopIncrementing ? "+=" : "-=" }} {{stepBy}}) 
+    Curr Idx: {{ stepIdx }}
 </div>

@@ -2,6 +2,7 @@
     padding: 1rem;
 }
 
+/* Array size control styling */
 .array-size-input {
     margin-right: 1rem;
     width: 3rem;
@@ -11,8 +12,19 @@
     box-shadow: 1px 1px 3px 1px #808080;
 }
 
-.resize-btn {
+.btn {
     border: 1px solid #333333;
+    box-shadow: 1px 1px 3px 1px #808080;
+    margin-right: 1rem;
+}
+
+/* Array loop controls styling */
+.loop-var-name-input {
+    margin-right: 1rem;
+    width: 10rem;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    text-align: center;
     box-shadow: 1px 1px 3px 1px #808080;
 }
 
