@@ -105,6 +105,7 @@
                           [stepBy]="slider.stepBy"
                           [validStepStartIdx]="slider.validStepStartIdx"
                           [validStepEndIdx]="slider.validStepEndIdx"
-                          [isLoopIncrementing]="slider.isLoopIncrementing"></app-array-slider>
+                          [isLoopIncrementing]="slider.isLoopIncrementing"
+                          (deleteSliderEventEmitter)="deleteSlider(slider)"></app-array-slider>
     </div>
 </section>

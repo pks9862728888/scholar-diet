@@ -120,6 +120,13 @@ export class ArrayComponent {
     }
   }
 
+  deleteSlider(slider: ArraySliderDataInterface) : void {
+    let idxToDelete: number = this.arraySliderList.indexOf(slider);
+    if (idxToDelete != -1) {
+      this.arraySliderList.splice(idxToDelete, 1);
+    }
+  }
+
   isLoopIncrementing() : boolean {
     return this.loopVariableForm.get('isLoopIncrementing')?.value;
   }

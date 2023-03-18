@@ -2,6 +2,7 @@
     width: 100%;
 }
 
+/* Array loop increment / decrement controls styling */
 .active-button {
     background-color: #9ec787;
 }
@@ -10,13 +11,21 @@
     border: 1px solid #d1d1d1;
 }
 
-
 .inc-dec-btn:not([disabled]) {
     border: 1px solid #000000;
 }
 
 .inc-dec-btn:hover:not([disabled]) {
     background-color: #82c55a;
+}
+
+/* Array loop additional controls styling */
+.icon:hover {
+    cursor: pointer;
+}
+
+.delete-icon {
+    color: #ff0000;
 }
 
 .m-r-1rem {

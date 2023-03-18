@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-array-slider',
@@ -16,6 +16,8 @@ export class ArraySliderComponent implements OnInit {
   @Input() isLoopIncrementing: boolean = true;
   stepIdx: number = 0;
 
+  @Output() deleteSliderEventEmitter : EventEmitter<void> = new EventEmitter<void>;
+
   constructor() {
   }
 
@@ -29,12 +31,10 @@ export class ArraySliderComponent implements OnInit {
 
   increment() : void {
     this.stepIdx += this.stepBy;
-    // this.validCurrStepIdx = this.stepIdx;
   }
 
   decrement() : void {
     this.stepIdx -= this.stepBy;
-    // this.validCurrStepIdx = this.stepIdx;
   }
 
   isOutOfBounds(isButtonIncrementing: boolean) : boolean {
@@ -55,5 +55,9 @@ export class ArraySliderComponent implements OnInit {
   isInValidDecrementingStepIdx(currentStepIdx: number): boolean {
     var res = !(currentStepIdx <= this.validStepStartIdx && currentStepIdx >= this.validStepEndIdx);
     return res;
+  }
+
+  deleteSlider() : void {
+    this.deleteSliderEventEmitter.emit();
   }
 }

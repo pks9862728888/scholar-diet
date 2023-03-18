@@ -8,6 +8,9 @@ import { ArrayCellComponent } from './array-cell/array-cell.component';
 import { ArrayComponent } from './array/array.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ArraySliderComponent } from './array-slider/array-slider.component';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,15 @@ import { ArraySliderComponent } from './array-slider/array-slider.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(faLibrary: FaIconLibrary) {
+    faLibrary.addIcons(faTrash);
+  }
+}
