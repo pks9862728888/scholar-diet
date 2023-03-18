@@ -10,7 +10,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ArraySliderComponent } from './array-slider/array-slider.component';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,6 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 export class AppModule {
 
   constructor(faLibrary: FaIconLibrary) {
-    faLibrary.addIcons(faTrash);
+    faLibrary.addIcons(faTrash, faPlusCircle);
   }
 }

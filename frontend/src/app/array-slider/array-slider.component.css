@@ -20,12 +20,25 @@
 }
 
 /* Array loop additional controls styling */
-.icon:hover {
-    cursor: pointer;
+.add-icon {
+    color: #0a58eb;
 }
 
 .delete-icon {
     color: #ff0000;
+}
+
+.icon {
+    border: 1px solid #3d3d3d;
+}
+
+/* Array local variables additional controls styling */
+.var-value {
+    width: 4rem;
+}
+
+.m-r-0_5rem {
+    margin-right: 0.5rem;
 }
 
 .m-r-1rem {
@@ -34,4 +47,8 @@
 
 .m-l-0_5rem {
     margin-left: 0.5rem;
+}
+
+.m-b-1rem {
+    margin-bottom: 1rem;
 }
