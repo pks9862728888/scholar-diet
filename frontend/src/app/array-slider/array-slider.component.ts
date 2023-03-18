@@ -29,36 +29,28 @@ export class ArraySliderComponent implements OnInit {
     return this.maxIdx + 1;
   }
 
-  updateStepIdx(currentStepIdx: number) {
-    // Determine whether to rollback in case currentIdx out of valid range
-    let shouldRollback: boolean = false;
-    if (this.isLoopIncrementing) {
-        if (this.isInValidIncrementingStepIdx(currentStepIdx)) {
-          shouldRollback = true;
-        }
-    } else {
-        if (this.isInValidDecrementingStepIdx(currentStepIdx)) {
-          shouldRollback = true;
-        }
-    }
+  increment() : void {
+    this.stepIdx += this.stepBy;
+    // this.validCurrStepIdx = this.stepIdx;
+  }
 
-    // Rollback or update current valid step index
-    if (shouldRollback) {
-      this.stepIdx = this.validCurrStepIdx;
-    } else {
-      this.validCurrStepIdx = currentStepIdx;
-    }
+  decrement() : void {
+    this.stepIdx -= this.stepBy;
+    // this.validCurrStepIdx = this.stepIdx;
+  }
+
+  isOutOfBounds(isButtonIncrementing: boolean) : boolean {
+    return isButtonIncrementing ? this.stepIdx > this.validStepEndIdx :
+      this.stepIdx < this.validStepStartIdx;
   }
 
   isInValidIncrementingStepIdx(currentStepIdx: number) : boolean {
     var res = !(currentStepIdx >= this.validStepStartIdx && currentStepIdx <= this.validStepEndIdx);
-    console.log("Is invalid incrementing start idx: " + res + " currIdx: " + currentStepIdx);
     return res;
   }
 
   isInValidDecrementingStepIdx(currentStepIdx: number): boolean {
     var res = !(currentStepIdx <= this.validStepStartIdx && currentStepIdx >= this.validStepEndIdx);
-    console.log("Is invalid decrementing start idx: " + res + " currIdx: " + currentStepIdx);
     return res;
   }
 }

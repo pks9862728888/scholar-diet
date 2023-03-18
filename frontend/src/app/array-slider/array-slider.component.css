@@ -1,3 +1,25 @@
 .slider {
     width: 100%;
 }
+
+.inc-dec-btn:disabled {
+    border: 1px solid #d1d1d1;
+}
+
+
+.inc-dec-btn:not([disabled]) {
+    border: 1px solid #000000;
+}
+
+.inc-dec-btn:hover:not([disabled]) {
+    /* border: 2px solid #000000; */
+    background-color: #82c55a;
+}
+
+.m-r-1rem {
+    margin-right: 1rem;
+}
+
+.m-l-0_5rem {
+    margin-left: 0.5rem;
+}

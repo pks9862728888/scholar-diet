@@ -1,13 +1,18 @@
 <input type="range" class="slider" 
+    [disabled]="true"
     [min]="minIdx" 
     [max]="getMaxSize()" 
-    [step]="stepBy"
     [(ngModel)]="stepIdx"
-    (change)="updateStepIdx(stepIdx)"
     required>
 <div>
-    for ({{name}} = {{ validCurrStepIdx }}; 
-        {{name}} {{ isLoopIncrementing ? "<=" : ">=" }} {{ validStepEndIdx}}; 
-        {{name}} {{ isLoopIncrementing ? "+=" : "-=" }} {{stepBy}}) 
-    Curr Idx: {{ stepIdx }}
+    for ({{ name }} = {{ stepIdx }}; 
+        {{ name }} {{ isLoopIncrementing ? "<=" : ">=" }} {{ validStepEndIdx }}; 
+        {{ name }} {{ isLoopIncrementing ? "+=" : "-=" }} {{ stepBy }}) 
+    {{ '{' }}{{ '}' }}
+    <button (click)="increment()" [disabled]="isOutOfBounds(true)" class="inc-dec-btn m-r-1rem m-l-0_5rem">
+        {{ name }} += {{ stepBy }}
+    </button>
+    <button (click)="decrement()" [disabled]="isOutOfBounds(false)" class="inc-dec-btn">
+        {{ name }} -= {{ stepBy }}
+    </button>
 </div>
