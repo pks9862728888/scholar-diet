@@ -46,7 +46,7 @@
                 <label for="loop-start-idx">Loop Start Idx</label>
                 <small *ngIf="loopVariableForm.get('startIdx')?.errors && 
                                 !loopVariableForm.get('startIdx')?.pristine">
-                    <em>Loop var start index should be a valid number ({{ minIdx }} - {{ maxIdx + 1 }})</em>
+                    <em>Loop var start index should be a valid number ({{ minIdx }} - {{ maxIdx }})</em>
                 </small>
             </div>
             <div class="form-floating mb-3">
@@ -56,7 +56,7 @@
                 <label for="loop-end-idx">Loop End Idx</label>
                 <small *ngIf="loopVariableForm.get('endIdx')?.errors && 
                                 !loopVariableForm.get('endIdx')?.pristine">
-                    <em>Loop var end index should be a valid number ({{ minIdx }} - {{ maxIdx + 1 }})</em>
+                    <em>Loop var end index should be a valid number ({{ minIdx }} - {{ maxIdx }})</em>
                 </small>
             </div>
             <div class="form-floating mb-3">
@@ -95,7 +95,7 @@
             [currIdx]="cellIdx"
             [maxCells]="getArraySize()"
             [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"
-            [arrayNumber]="currentArrayNumber"></array-cell>
+            [arrayNumber]="arrayNumber"></array-cell>
     </div>
     <!-- Array slider -->
     <div class="m-t-2rem" *ngFor="let slider of arraySliderList">
@@ -106,6 +106,7 @@
                           [validStepStartIdx]="slider.validStepStartIdx"
                           [validStepEndIdx]="slider.validStepEndIdx"
                           [isLoopIncrementing]="slider.isLoopIncrementing"
+                          [arrayNumber]="arrayNumber"
                           (deleteSliderEventEmitter)="deleteSlider(slider)"></app-array-slider>
     </div>
 </section>

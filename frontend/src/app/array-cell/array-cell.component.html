@@ -2,6 +2,7 @@
     <input type="text" class="array-cell"
         [id]="getArrayCellUniqueId()"
         [(ngModel)]="data"
-        [ngStyle]="{'width' : getMaxCellWidth()}">
+        [ngStyle]="{'width' : getMaxCellWidth()}"
+        (change)="sendArrayCellValueUpdateEvent(data)">
     <div class="arr-idx" [ngStyle]="{'transform' : getTranslatedXPositionInPx()}">{{ currIdx }}</div>
 </div>
