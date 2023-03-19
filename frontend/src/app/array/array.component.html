@@ -94,7 +94,8 @@
         <array-cell *ngFor="let cellIdx of cellIdxList"
             [currIdx]="cellIdx"
             [maxCells]="getArraySize()"
-            [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"></array-cell>
+            [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"
+            [arrayNumber]="currentArrayNumber"></array-cell>
     </div>
     <!-- Array slider -->
     <div class="m-t-2rem" *ngFor="let slider of arraySliderList">

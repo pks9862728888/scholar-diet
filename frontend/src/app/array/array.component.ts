@@ -162,6 +162,6 @@ export class ArrayComponent {
   }
 
   getUniqueArrayId() : string {
-    return "array-id-" + this.currentArrayNumber;
+    return `array-id-${this.currentArrayNumber}`;
   }
 }

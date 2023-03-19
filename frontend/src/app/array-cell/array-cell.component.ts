@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
 export class ArrayCellComponent {
 
   data: string = "";
+  @Input() arrayNumber: number = 0;
   @Input() currIdx: number = 0;
   @Input() maxCells: number = 0;
   @Input() maxPaddingForArrayInBothSidesInPx: number = 0;
@@ -15,7 +16,7 @@ export class ArrayCellComponent {
   constructor() { }
 
   getArrayCellUniqueId() {
-    return "array-cell-" + this.currIdx;
+    return `array-${this.arrayNumber}-cell-${this.currIdx}`;
   }
 
   getMaxCellWidth() : string {

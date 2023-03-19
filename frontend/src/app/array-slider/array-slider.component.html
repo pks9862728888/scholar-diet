@@ -25,6 +25,8 @@
             <!-- Show status if loop is active or terminated -->
             <span class="badge bg-success" *ngIf="!isLoopIndexOutOfBounds()">Is Active</span>
             <span class="badge bg-secondary" *ngIf="isLoopIndexOutOfBounds()">Is Terminated</span>
+            <!-- Show current array element value -->
+            arr[{{ name }}] = 
         </div>
         <div>
             <button class="icon m-r-0_5rem" (click)="showAddTrackingVariableFrom()"
