@@ -23,6 +23,9 @@ export class ArrayComponent {
   arraySizeForm: FormGroup;
   @Input() maxPaddingInBothSidesInPx = 0;
 
+  // Contols for managing multiple arrays
+  currentArrayNumber = 0;
+
   // Controls for adding and deleting loops
   showLoopVariableForm: boolean = false;
   loopVariableForm: FormGroup;
@@ -156,5 +159,9 @@ export class ArrayComponent {
   hideLoopVariableForm(): void {
     this.showLoopVariableForm = false;
     this.resetAddLoopVariableFrom();
+  }
+
+  getUniqueArrayId() : string {
+    return "array-id-" + this.currentArrayNumber;
   }
 }
