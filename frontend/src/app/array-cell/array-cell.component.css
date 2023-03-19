@@ -5,7 +5,8 @@
 }
 
 .arr-idx {
-    position: fixed;
+    position: relative;
+    clear: both;
+    height: 0;
     z-index: 1;
-    transform: translate(-3px, 30px);
 }

@@ -1,4 +1,5 @@
 .app-container {
+    /* 48px is the height of navbar */
     height: calc(100vh - 48px);
     overflow-y: scroll;
 }

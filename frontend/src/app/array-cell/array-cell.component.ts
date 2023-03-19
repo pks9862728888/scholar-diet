@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'array-cell',
   templateUrl: './array-cell.component.html',
   styleUrls: ['./array-cell.component.css']
 })
-export class ArrayCellComponent implements OnInit {
+export class ArrayCellComponent {
 
   data: string = "";
   @Input() currIdx: number = 0;
@@ -14,12 +14,23 @@ export class ArrayCellComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  getArrayCellUniqueId() {
+    return "array-cell-" + this.currIdx;
   }
 
   getMaxCellWidth() : string {
     var maxCellWidth = +Math.max(this.maxPaddingForArrayInBothSidesInPx - 1,
       Math.floor((window.innerWidth - this.maxPaddingForArrayInBothSidesInPx) / this.maxCells));
     return maxCellWidth + "px";
+  }
+
+  getTranslatedXPositionInPx(): string {
+    let width = Math.floor((document.getElementById(this.getArrayCellUniqueId())?.offsetWidth || 0) 
+      / 2 - this.getOffset());
+    return `translateX(${width}px)`;
+  }
+
+  getOffset() : number {
+    return this.maxCells > 9 ? 8 : 0;
   }
 }

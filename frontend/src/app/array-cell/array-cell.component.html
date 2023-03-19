@@ -1,4 +1,7 @@
-<span class="arr-idx">{{ currIdx }}</span>
-<input type="text" class="array-cell"
+<div>
+    <input type="text" class="array-cell"
+        [id]="getArrayCellUniqueId()"
         [(ngModel)]="data"
         [ngStyle]="{'width' : getMaxCellWidth()}">
+    <div class="arr-idx" [ngStyle]="{'transform' : getTranslatedXPositionInPx()}">{{ currIdx }}</div>
+</div>

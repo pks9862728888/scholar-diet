@@ -18,7 +18,7 @@ export class ArrayComponent {
   // Controls for controlling array size
   minIdx: number = 0;
   maxIdx: number = 0;
-  maxAllowedSize: number = 40;
+  maxAllowedSize: number = 20;
   cellIdxList : number[] = [];
   arraySizeForm: FormGroup;
   @Input() maxPaddingInBothSidesInPx = 0;
