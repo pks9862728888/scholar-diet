@@ -4,4 +4,6 @@ body {
     margin: 0px;
     padding: 0px;
     background-color: #e4e4e4;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    overflow-y: hidden;
 }
