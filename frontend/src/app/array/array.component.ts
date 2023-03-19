@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ArraySliderDataInterface } from '../array-slider/ArraySliderDataInterface';
+import { ArraySliderDataInterface } from '../dto/ArraySliderDataInterface';
 import { NameValidators } from '../form-field-validators/NameValidators';
 import { NumberValidators } from '../form-field-validators/NumberValidators';
 
@@ -24,7 +24,7 @@ export class ArrayComponent {
   @Input() maxPaddingInBothSidesInPx = 0;
 
   // Contols for managing multiple arrays
-  currentArrayNumber = 0;
+  arrayNumber = 0;
 
   // Controls for adding and deleting loops
   showLoopVariableForm: boolean = false;
@@ -41,8 +41,8 @@ export class ArrayComponent {
     });
     this.loopVariableForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(1), NameValidators.validateVariableName()]],
-      startIdx: [this.minIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx + 1)]],
-      endIdx: [this.maxIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx + 1)]],
+      startIdx: [this.minIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx)]],
+      endIdx: [this.maxIdx, [Validators.required, NumberValidators.range(this.minIdx, this.maxIdx)]],
       stepBy: [1, [Validators.required, Validators.min(0)]],
       isLoopIncrementing: [true, [Validators.required]]
     });
@@ -162,6 +162,6 @@ export class ArrayComponent {
   }
 
   getUniqueArrayId() : string {
-    return `array-id-${this.currentArrayNumber}`;
+    return `array-id-${this.arrayNumber}`;
   }
 }
