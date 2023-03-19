@@ -30,4 +30,15 @@ export class ArrayInteractionService {
     let value: string | undefined = this.arrayDataMap.get(arrayNumber)?.get(arrayCellIdx);
     return value ? value : ``;
   }
+
+  removeArrayDeletedCellValues(arrayNumber: number, newResizedMaxCellIdx: number): void {
+    if (this.arrayDataMap.has(arrayNumber)) {
+      // Delete all the cell values which do not exist
+      for (let [key, value] of this.arrayDataMap.get(arrayNumber)!) {
+        if (+key > newResizedMaxCellIdx) {
+          this.arrayDataMap.get(arrayNumber)?.delete(+key);
+        }
+      }
+    }
+  }
 }

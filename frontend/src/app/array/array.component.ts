@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArraySliderDataInterface } from '../dto/ArraySliderDataInterface';
 import { NameValidators } from '../form-field-validators/NameValidators';
 import { NumberValidators } from '../form-field-validators/NumberValidators';
+import { ArrayInteractionService } from '../services/array-interaction-service.service';
 
 interface ArrayControlI {
   maxSize: number
@@ -33,7 +34,7 @@ export class ArrayComponent {
   // Loop controls
   arraySliderList: ArraySliderDataInterface[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private ais: ArrayInteractionService) {
     this.initArrayWithDefaultValues();
     this.arraySizeForm = this.fb.group({
       maxSize: [this.maxIdx + 1, [Validators.required,
@@ -101,6 +102,7 @@ export class ArrayComponent {
         }
       } else if (newSize < oldSize) {
         this.arraySliderList = [];
+        this.ais.removeArrayDeletedCellValues(this.arrayNumber, this.maxIdx);
       }
     }
   }

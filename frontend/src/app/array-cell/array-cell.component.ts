@@ -33,7 +33,7 @@ export class ArrayCellComponent {
   }
 
   getOffset() : number {
-    return this.maxCells > 9 ? 8 : 0;
+    return this.currIdx > 9 ? 8 : 4;
   }
 
   sendArrayCellValueUpdateEvent(data: string): void {
