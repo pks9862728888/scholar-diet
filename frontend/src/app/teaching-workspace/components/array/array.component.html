@@ -1,20 +1,27 @@
 <section name="array" class="array">
-    <div class="d-flex" [ngClass]="{'m-b-1rem' : !arraySizeForm.get('maxSize')?.errors,
+    <div class="d-flex temp" [ngClass]="{'m-b-1rem' : !arraySizeForm.get('maxSize')?.errors,
                                     'm-b-0_5rem' : arraySizeForm.get('maxSize')?.errors}">
-        <!-- Form for resizing array -->
-        <form [formGroup]="arraySizeForm" class="d-flex">
-            <input type="number" class="array-size-input"
-                    [placeholder]="maxIdx"
-                    formControlName="maxSize"
-                    aria-label="Max array cells">
-            <button class="btn btn-warning" 
-                    type="button" 
-                    (click)="resizeArray()"
-                    [disabled]="arraySizeForm.invalid || isArraySizeSame()">Resize Array</button>
-        </form>
-        <!-- Show or hide loop variable form  -->
-        <button class="btn btn-primary" type="button" *ngIf="!showLoopVariableForm"
-            (click)="makeLoopVarFormVisible()">Add Loop Variable</button>
+        <div class="me-auto d-flex">
+            <!-- Form for resizing array -->
+            <form [formGroup]="arraySizeForm" class="d-flex">
+                <input type="number" class="array-size-input"
+                        [placeholder]="maxIdx"
+                        formControlName="maxSize"
+                        aria-label="Max array cells">
+                <button class="btn btn-warning" 
+                        type="button" 
+                        (click)="resizeArray()"
+                        [disabled]="arraySizeForm.invalid || isArraySizeSame()">Resize Array</button>
+            </form>
+            <!-- Show or hide loop variable form  -->
+            <button class="btn btn-primary" type="button" *ngIf="!showLoopVariableForm"
+                (click)="makeLoopVarFormVisible()">Add Loop Variable</button>
+        </div>
+        <div class="d-flex align-items-center">
+            <button class="icon" (click)="deleteComponent()">
+                <fa-icon icon="trash" class="delete-icon"></fa-icon>
+            </button>
+        </div>
     </div>
     <div *ngIf="arraySizeForm.get('maxSize')?.errors" class="m-b-1rem">
         <small ><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>

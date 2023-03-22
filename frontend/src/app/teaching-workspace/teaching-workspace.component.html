@@ -1,1 +1,34 @@
-<app-array [maxPaddingInBothSidesInPx]="10"></app-array>
+<!-- Show workspace components -->
+<section>
+    <div *ngFor="let component of componentList">
+        <app-array *ngIf="component.type == ARRAY"
+                    [componentRef]="component.reference"
+                    (deleteComponentEvent)="deleteComponent($event)"
+                    [maxPaddingInBothSidesInPx]="10"></app-array>
+    </div>
+</section>
+<!-- Hide or display controls menu-bar -->
+<div class="p-1r" *ngIf="!showWorkspaceControls">
+    <em>
+        <a (click)="showWorkspaceControls = true" class="show-controls">
+            <fa-icon [icon]="['far', 'eye']"></fa-icon> Show controls
+        </a>
+    </em>
+</div>
+<!-- Workspace controls menu-bar -->
+<div class="p-1r" *ngIf="showWorkspaceControls">
+    <div class="card show-controls-card p-1r">
+        <div class="d-flex">
+            <div class="me-auto">
+                <!-- Controls menu bar -->
+                <button class="btn btn-outline-secondary" (click)="addComponent(ARRAY)">Array</button>
+            </div>
+            <div class="d-flex align-items-center"
+                [ngClass]="{'d-none': componentList.length === 0}">
+                <!-- Close controls menu bar -->
+                <button type="button" class="btn-close" aria-label="close-button"
+                    (click)="showWorkspaceControls = false"></button>
+            </div>
+        </div>
+    </div>
+</div>

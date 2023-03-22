@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ArrayInteractionService } from '../services/array-interaction-service.service';
+import { ArrayInteractionService } from '../../services/array-interaction-service.service';
 
 @Component({
   selector: 'array-cell',

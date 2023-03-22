@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ArraySliderDataInterface } from '../dto/ArraySliderDataInterface';
-import { NameValidators } from '../../form-field-validators/NameValidators';
-import { NumberValidators } from '../../form-field-validators/NumberValidators';
-import { ArrayInteractionService } from '../services/array-interaction-service.service';
+import { ArraySliderDataInterface } from '../../dto/ArraySliderDataInterface';
+import { NameValidators } from '../../../form-field-validators/NameValidators';
+import { NumberValidators } from '../../../form-field-validators/NumberValidators';
+import { ArrayInteractionService } from '../../services/array-interaction-service.service';
+import { AbstractWorksSpaceComponent } from '../AbstractWorkspaceComponent';
+import { ComponentTypeEnum } from '../../enums/ComponentTypeEnum';
 
 interface ArrayControlI {
   maxSize: number
@@ -14,7 +16,7 @@ interface ArrayControlI {
   templateUrl: './array.component.html',
   styleUrls: ['./array.component.css']
 })
-export class ArrayComponent {
+export class ArrayComponent extends AbstractWorksSpaceComponent {
 
   // Controls for controlling array size
   minIdx: number = 0;
@@ -35,6 +37,7 @@ export class ArrayComponent {
   arraySliderList: ArraySliderDataInterface[] = [];
 
   constructor(private fb: FormBuilder, private ais: ArrayInteractionService) {
+    super(ComponentTypeEnum.ARRAY);
     this.initArrayWithDefaultValues();
     this.arraySizeForm = this.fb.group({
       maxSize: [this.maxIdx + 1, [Validators.required,

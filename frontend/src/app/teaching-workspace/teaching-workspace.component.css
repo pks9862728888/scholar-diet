@@ -1,0 +1,21 @@
+.show-controls {
+    cursor: pointer;
+    text-decoration: none;
+    opacity: 0.5;
+    border: 1px solid #bdbdbd;
+    padding: 0.5rem;
+}
+
+.show-controls:hover {
+    opacity: 1;
+}
+
+.show-controls-card {
+    background-color: #f3efef;
+    z-index: 1;
+    box-shadow: 1px 1px #a3a3a3;
+}
+
+.p-1r {
+    padding: 1rem
+}

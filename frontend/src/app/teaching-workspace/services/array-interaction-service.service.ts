@@ -26,7 +26,6 @@ export class ArrayInteractionService {
   }
 
   getArrayCellValue(arrayNumber: number, arrayCellIdx: number) : string {
-    console.log(arrayNumber + " " + arrayCellIdx);
     let value: string | undefined = this.arrayDataMap.get(arrayNumber)?.get(arrayCellIdx);
     return value ? value : ``;
   }
