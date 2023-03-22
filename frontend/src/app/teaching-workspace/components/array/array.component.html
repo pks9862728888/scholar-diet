@@ -1,6 +1,6 @@
-<section name="array" class="array">
-    <div class="d-flex temp" [ngClass]="{'m-b-1rem' : !arraySizeForm.get('maxSize')?.errors,
-                                    'm-b-0_5rem' : arraySizeForm.get('maxSize')?.errors}">
+<section name="array">
+    <div class="d-flex" [ngClass]="{'mb-1rem' : !arraySizeForm.get('maxSize')?.errors,
+                                    'mb-0_5rem' : arraySizeForm.get('maxSize')?.errors}">
         <div class="me-auto d-flex">
             <!-- Form for resizing array -->
             <form [formGroup]="arraySizeForm" class="d-flex">
@@ -23,11 +23,11 @@
             </button>
         </div>
     </div>
-    <div *ngIf="arraySizeForm.get('maxSize')?.errors" class="m-b-1rem">
+    <div *ngIf="arraySizeForm.get('maxSize')?.errors" class="mb-1rem">
         <small ><em>Array size should be a valid number ({{ minIdx }} - {{ maxAllowedSize }})</em></small>
     </div>
     <!-- Form for inserting loop control variables -->
-    <div *ngIf="showLoopVariableForm" class="m-b-1rem loop-var-form">
+    <div *ngIf="showLoopVariableForm" class="mb-1rem loop-var-form">
         <form [formGroup]="loopVariableForm">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="loop-var-name" 
@@ -78,7 +78,7 @@
                     <em>Should be a valid number >= 0</em>
                 </small>
             </div>
-            <div class="form-check m-b-1rem">
+            <div class="form-check mb-1rem">
                 <input class="form-check-input" type="checkbox" id="loop-type"
                     [value]="loopVariableForm.get('isLoopIncrementing')"
                     formControlName="isLoopIncrementing">
@@ -97,7 +97,7 @@
         </form>
     </div>
     <!-- Array cells -->
-    <div class="array-cells d-flex" [id]="getUniqueArrayId()">
+    <div class="array-cells d-flex pb-1rem" [id]="getUniqueArrayId()">
         <array-cell *ngFor="let cellIdx of cellIdxList"
             [currIdx]="cellIdx"
             [maxCells]="getArraySize()"
@@ -105,7 +105,7 @@
             [componentRef]="getComponentRef()"></array-cell>
     </div>
     <!-- Array slider -->
-    <div class="m-t-2rem" *ngFor="let slider of arraySliderList">
+    <div class="mt-2rem" *ngFor="let slider of arraySliderList">
         <app-array-slider [name]="slider.name" 
                           [minIdx]="slider.minIdx"
                           [maxIdx]="slider.maxIdx"

@@ -21,8 +21,8 @@ export class ArrayCellComponent {
   }
 
   getMaxCellWidth() : string {
-    var maxCellWidth = +Math.max(this.maxPaddingForArrayInBothSidesInPx - 1,
-      Math.floor((window.innerWidth - this.maxPaddingForArrayInBothSidesInPx) / this.maxCells));
+    var maxCellWidth = +Math.floor((window.innerWidth - this.maxPaddingForArrayInBothSidesInPx) 
+      / this.maxCells);
     return maxCellWidth + "px";
   }
 

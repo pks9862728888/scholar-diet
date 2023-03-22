@@ -1,10 +1,10 @@
 <!-- Show workspace components -->
 <section>
-    <div *ngFor="let component of componentList">
+    <div *ngFor="let component of componentList" class="card comp-card">
         <app-array *ngIf="component.type == ARRAY"
                     [componentRef]="component.reference"
                     (deleteComponentEvent)="deleteComponent($event)"
-                    [maxPaddingInBothSidesInPx]="10"></app-array>
+                    [maxPaddingInBothSidesInPx]="42"></app-array>
     </div>
 </section>
 <!-- Hide or display controls menu-bar -->

@@ -15,7 +15,8 @@ export class TeachingWorkspaceComponent {
   // component enum types
   ARRAY: ComponentTypeEnum = ComponentTypeEnum.ARRAY;
 
-  constructor() { }
+  constructor() {
+  }
 
   addComponent(type: ComponentTypeEnum): void {
     // Add to component list
