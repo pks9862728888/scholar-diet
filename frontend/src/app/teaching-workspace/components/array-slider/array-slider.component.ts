@@ -127,17 +127,13 @@ export class ArraySliderComponent implements OnInit, OnDestroy {
         name: variableName,
         value: ''
       });
-      console.log(this.variableList);
       this.hideAddLocalVariableFrom();
       this.addVariableForm.reset();
     }
   }
 
-  deleteVariable(variable: VariableI) {
-    let idx = this.variableList.findIndex(v => v.name === variable.name);
-    if (idx !== -1) {
-      this.variableList.splice(idx, 1);
-    }
+  deleteVariable(variable: VariableI): void {
+    this.variableList = this.variableList.filter(v => v.name !== variable.name);
   }
 
   updateCurrentCellValue(): void {

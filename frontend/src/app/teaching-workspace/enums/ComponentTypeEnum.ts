@@ -1,3 +1,5 @@
 export enum ComponentTypeEnum {
-    ARRAY = 'ARRAY'
+    ARRAY = 'ARRAY',
+    MAP = 'MAP',
+    CODE = 'CODE'
 }

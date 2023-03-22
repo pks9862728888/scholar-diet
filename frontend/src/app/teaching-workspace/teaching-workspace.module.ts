@@ -8,6 +8,8 @@ import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontaweso
 import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TeachingWorkspaceComponent } from './teaching-workspace.component';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { MapComponent } from './components/map/map.component';
+import { CodeComponent } from './components/code/code.component';
 
 
 @NgModule({
@@ -16,6 +18,8 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
     ArrayCellComponent,
     ArrayComponent,
     TeachingWorkspaceComponent,
+    MapComponent,
+    CodeComponent,
   ],
   imports: [
     CommonModule,
