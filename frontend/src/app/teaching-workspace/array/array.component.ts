@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArraySliderDataInterface } from '../dto/ArraySliderDataInterface';
-import { NameValidators } from '../form-field-validators/NameValidators';
-import { NumberValidators } from '../form-field-validators/NumberValidators';
+import { NameValidators } from '../../form-field-validators/NameValidators';
+import { NumberValidators } from '../../form-field-validators/NumberValidators';
 import { ArrayInteractionService } from '../services/array-interaction-service.service';
 
 interface ArrayControlI {

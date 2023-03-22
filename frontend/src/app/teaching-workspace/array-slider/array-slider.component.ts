@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NameValidators } from '../form-field-validators/NameValidators';
 import { VariableI } from '../dto/VariableI';
 import { ArrayInteractionService } from '../services/array-interaction-service.service';
 import { ArrayCellValueDTO } from '../dto/ArrayCellValueDTO';
 import { Subscription } from 'rxjs';
+import { NameValidators } from 'src/app/form-field-validators/NameValidators';
 
 @Component({
   selector: 'app-array-slider',
