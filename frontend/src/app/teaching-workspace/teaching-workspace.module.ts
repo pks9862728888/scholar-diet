@@ -9,6 +9,7 @@ import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TeachingWorkspaceComponent } from './teaching-workspace.component';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { MapComponent } from './components/map/map.component';
+import { CodeComponent } from './components/code/code.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { MapComponent } from './components/map/map.component';
     ArrayComponent,
     TeachingWorkspaceComponent,
     MapComponent,
+    CodeComponent,
   ],
   imports: [
     CommonModule,

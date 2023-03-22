@@ -1,0 +1,12 @@
+/* Icons styling */
+.delete-icon {
+    color: #ff0000;
+}
+
+.icon {
+    border: 1px solid #3d3d3d;
+}
+
+.mt-1rem {
+    margin-top: 1rem;
+}
