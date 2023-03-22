@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NameValidators } from 'src/app/form-field-validators/NameValidators';
+import { VariableI } from '../../dto/VariableI';
 import { ComponentTypeEnum } from '../../enums/ComponentTypeEnum';
 import { AbstractWorksSpaceComponent } from '../AbstractWorkspaceComponent';
 
@@ -14,11 +16,16 @@ export class MapComponent extends AbstractWorksSpaceComponent {
   map: Map<string, string> = new Map<string, string>();
   getQueryValue: string | null = null;
   getOrDefaultQueryValue: string | null = null;
+  variableList: VariableI[] = [];
 
   // Forms for map operation
   pushForm: FormGroup;
   getForm: FormGroup;
   getOrDefaultForm: FormGroup;
+  addVariableForm: FormGroup;
+
+  // Form controls
+  showAddVariableForm = false;
 
   constructor(private fb: FormBuilder) {
     super(ComponentTypeEnum.MAP);
@@ -29,11 +36,15 @@ export class MapComponent extends AbstractWorksSpaceComponent {
       value: []
     });
 
-    // Get form
+    // Get operations form
     this.getForm = fb.group({key: []});
     this.getOrDefaultForm = fb.group({
       key: [],
       defaultValue: [null, [Validators.required]]
+    });
+
+    this.addVariableForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(1), NameValidators.validateVariableName()]]
     });
   }
 
@@ -71,4 +82,26 @@ export class MapComponent extends AbstractWorksSpaceComponent {
     }
   }
 
+  addVariable() : void {
+    let variableName : string = this.addVariableForm.get('name')?.value;
+    if (this.variableList.filter(v => v.name === variableName).length > 0) {
+      // Show validation error
+      this.addVariableForm.get('name')?.setErrors(
+        { 'duplicateVariableName' : 'Another variable exists with same variable name: ' + 
+          variableName }
+      );
+    } else {
+      // Add the variable to local variable list
+      this.variableList.push({
+        name: variableName,
+        value: ''
+      });
+      this.showAddVariableForm = false;
+      this.addVariableForm.reset();
+    }
+  }
+
+  deleteVariable(variable: VariableI) : void{
+    this.variableList = this.variableList.filter(v => v.name !== variable.name);
+  }
 }

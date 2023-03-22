@@ -13,6 +13,10 @@
 }
 
 /* Icons styling */
+.add-icon {
+    color: #0a58eb;
+}
+
 .delete-icon {
     color: #ff0000;
 }
@@ -36,6 +40,12 @@
 .empty-map-alert {
     width: 100%;
     padding: 0.5rem;
+    margin-bottom: 0;
+}
+
+/* Array local variables additional controls styling */
+.var-value {
+    width: 4rem;
 }
 
 /* Spacing */
@@ -43,6 +53,14 @@
     margin-top: 1rem;
 }
 
+.mr-0_5rem {
+    margin-right: 0.5rem;
+}
+
 .mr-1rem {
     margin-right: 1rem;
+}
+
+.mb-1rem {
+    margin-bottom: 1rem;
 }
