@@ -9,7 +9,7 @@ import { ArrayInteractionService } from '../../services/array-interaction-servic
 export class ArrayCellComponent {
 
   data: string = "";
-  @Input() arrayNumber: number = 0;
+  @Input() componentRef: string = '';
   @Input() currIdx: number = 0;  // Index of current cell
   @Input() maxCells: number = 0;
   @Input() maxPaddingForArrayInBothSidesInPx: number = 0;
@@ -17,7 +17,7 @@ export class ArrayCellComponent {
   constructor(private ais: ArrayInteractionService) { }
 
   getArrayCellUniqueId() {
-    return `array-${this.arrayNumber}-cell-${this.currIdx}`;
+    return `${this.componentRef}-cell-${this.currIdx}`;
   }
 
   getMaxCellWidth() : string {
@@ -38,7 +38,7 @@ export class ArrayCellComponent {
 
   sendArrayCellValueUpdateEvent(data: string): void {
     this.ais.sendArrayCellValueUpdateEvent({
-      arrayNumber: this.arrayNumber,
+      componentRef: this.componentRef,
       arrayCellIdx: this.currIdx,
       value: data
     });

@@ -1,6 +1,6 @@
 export interface ArrayCellValueDTO {
     // Specifies array number because there can be multiple arrays in DOM
-    arrayNumber: number;
+    componentRef: string;
     arrayCellIdx: number;
     value: string;
 }

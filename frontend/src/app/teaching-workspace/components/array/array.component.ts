@@ -26,9 +26,6 @@ export class ArrayComponent extends AbstractWorksSpaceComponent {
   arraySizeForm: FormGroup;
   @Input() maxPaddingInBothSidesInPx = 0;
 
-  // Contols for managing multiple arrays
-  arrayNumber = 0;
-
   // Controls for adding and deleting loops
   showLoopVariableForm: boolean = false;
   loopVariableForm: FormGroup;
@@ -105,7 +102,7 @@ export class ArrayComponent extends AbstractWorksSpaceComponent {
         }
       } else if (newSize < oldSize) {
         this.arraySliderList = [];
-        this.ais.removeArrayDeletedCellValues(this.arrayNumber, this.maxIdx);
+        this.ais.removeArrayDeletedCellValues(this.getComponentRef(), this.maxIdx);
       }
     }
   }
@@ -167,6 +164,6 @@ export class ArrayComponent extends AbstractWorksSpaceComponent {
   }
 
   getUniqueArrayId() : string {
-    return `array-id-${this.arrayNumber}`;
+    return `${this.getComponentRef()}`;
   }
 }

@@ -102,7 +102,7 @@
             [currIdx]="cellIdx"
             [maxCells]="getArraySize()"
             [maxPaddingForArrayInBothSidesInPx]="getMaxPaddingInBothSidesOfArrayInPx()"
-            [arrayNumber]="arrayNumber"></array-cell>
+            [componentRef]="getComponentRef()"></array-cell>
     </div>
     <!-- Array slider -->
     <div class="m-t-2rem" *ngFor="let slider of arraySliderList">
@@ -113,7 +113,7 @@
                           [validStepStartIdx]="slider.validStepStartIdx"
                           [validStepEndIdx]="slider.validStepEndIdx"
                           [isLoopIncrementing]="slider.isLoopIncrementing"
-                          [arrayNumber]="arrayNumber"
+                          [componentRef]="componentRef"
                           (deleteSliderEventEmitter)="deleteSlider(slider)"></app-array-slider>
     </div>
 </section>

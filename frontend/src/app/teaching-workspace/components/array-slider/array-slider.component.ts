@@ -14,7 +14,7 @@ import { NameValidators } from 'src/app/form-field-validators/NameValidators';
 export class ArraySliderComponent implements OnInit, OnDestroy {
 
   // Controls for knowing the array which it is pointing to
-  @Input() arrayNumber: number = 0;
+  @Input() componentRef: string = '';
 
   // Controls for controlling slider
   @Input() name: string = '';
@@ -42,8 +42,9 @@ export class ArraySliderComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to subject to get updated cell value when cell value changes
-    this.arrayDataUpdateSubscription = ais.arrayDataUpdateSubject.subscribe((data: ArrayCellValueDTO) => {
-      if (data.arrayNumber === this.arrayNumber && data.arrayCellIdx === this.stepIdx) {
+    this.arrayDataUpdateSubscription = ais.arrayDataUpdateSubject
+    .subscribe((data: ArrayCellValueDTO) => {
+      if (data.componentRef === this.componentRef && data.arrayCellIdx === this.stepIdx) {
         this.arrCurrCellValue = data.value;
       }
     });
@@ -140,7 +141,6 @@ export class ArraySliderComponent implements OnInit, OnDestroy {
   }
 
   updateCurrentCellValue(): void {
-    this.arrCurrCellValue = this.ais.getArrayCellValue(this.arrayNumber, this.stepIdx);
+    this.arrCurrCellValue = this.ais.getArrayCellValue(this.componentRef, this.stepIdx);
   }
-  
 }
