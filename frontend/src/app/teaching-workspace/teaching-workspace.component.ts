@@ -14,6 +14,7 @@ export class TeachingWorkspaceComponent {
 
   // component enum types
   ARRAY: ComponentTypeEnum = ComponentTypeEnum.ARRAY;
+  MAP: ComponentTypeEnum = ComponentTypeEnum.MAP;
 
   constructor() {
   }
