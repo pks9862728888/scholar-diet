@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ArrayInteractionService } from '../services/array-interaction-service.service';
+import { ArrayInteractionService } from '../../services/array-interaction-service.service';
 
 @Component({
   selector: 'array-cell',
@@ -9,7 +9,7 @@ import { ArrayInteractionService } from '../services/array-interaction-service.s
 export class ArrayCellComponent {
 
   data: string = "";
-  @Input() arrayNumber: number = 0;
+  @Input() componentRef: string = '';
   @Input() currIdx: number = 0;  // Index of current cell
   @Input() maxCells: number = 0;
   @Input() maxPaddingForArrayInBothSidesInPx: number = 0;
@@ -17,12 +17,12 @@ export class ArrayCellComponent {
   constructor(private ais: ArrayInteractionService) { }
 
   getArrayCellUniqueId() {
-    return `array-${this.arrayNumber}-cell-${this.currIdx}`;
+    return `${this.componentRef}-cell-${this.currIdx}`;
   }
 
   getMaxCellWidth() : string {
-    var maxCellWidth = +Math.max(this.maxPaddingForArrayInBothSidesInPx - 1,
-      Math.floor((window.innerWidth - this.maxPaddingForArrayInBothSidesInPx) / this.maxCells));
+    var maxCellWidth = +Math.floor((window.innerWidth - this.maxPaddingForArrayInBothSidesInPx) 
+      / this.maxCells);
     return maxCellWidth + "px";
   }
 
@@ -38,7 +38,7 @@ export class ArrayCellComponent {
 
   sendArrayCellValueUpdateEvent(data: string): void {
     this.ais.sendArrayCellValueUpdateEvent({
-      arrayNumber: this.arrayNumber,
+      componentRef: this.componentRef,
       arrayCellIdx: this.currIdx,
       value: data
     });
