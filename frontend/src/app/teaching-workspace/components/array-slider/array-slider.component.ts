@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NameValidators } from '../form-field-validators/NameValidators';
-import { VariableI } from '../dto/VariableI';
-import { ArrayInteractionService } from '../services/array-interaction-service.service';
-import { ArrayCellValueDTO } from '../dto/ArrayCellValueDTO';
+import { VariableI } from '../../dto/VariableI';
+import { ArrayInteractionService } from '../../services/array-interaction-service.service';
+import { ArrayCellValueDTO } from '../../dto/ArrayCellValueDTO';
 import { Subscription } from 'rxjs';
+import { NameValidators } from 'src/app/form-field-validators/NameValidators';
 
 @Component({
   selector: 'app-array-slider',
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class ArraySliderComponent implements OnInit, OnDestroy {
 
   // Controls for knowing the array which it is pointing to
-  @Input() arrayNumber: number = 0;
+  @Input() componentRef: string = '';
 
   // Controls for controlling slider
   @Input() name: string = '';
@@ -42,8 +42,9 @@ export class ArraySliderComponent implements OnInit, OnDestroy {
     });
 
     // Subscribe to subject to get updated cell value when cell value changes
-    this.arrayDataUpdateSubscription = ais.arrayDataUpdateSubject.subscribe((data: ArrayCellValueDTO) => {
-      if (data.arrayNumber === this.arrayNumber && data.arrayCellIdx === this.stepIdx) {
+    this.arrayDataUpdateSubscription = ais.arrayDataUpdateSubject
+    .subscribe((data: ArrayCellValueDTO) => {
+      if (data.componentRef === this.componentRef && data.arrayCellIdx === this.stepIdx) {
         this.arrCurrCellValue = data.value;
       }
     });
@@ -126,21 +127,16 @@ export class ArraySliderComponent implements OnInit, OnDestroy {
         name: variableName,
         value: ''
       });
-      console.log(this.variableList);
       this.hideAddLocalVariableFrom();
       this.addVariableForm.reset();
     }
   }
 
-  deleteVariable(variable: VariableI) {
-    let idx = this.variableList.findIndex(v => v.name === variable.name);
-    if (idx !== -1) {
-      this.variableList.splice(idx, 1);
-    }
+  deleteVariable(variable: VariableI): void {
+    this.variableList = this.variableList.filter(v => v.name !== variable.name);
   }
 
   updateCurrentCellValue(): void {
-    this.arrCurrCellValue = this.ais.getArrayCellValue(this.arrayNumber, this.stepIdx);
+    this.arrCurrCellValue = this.ais.getArrayCellValue(this.componentRef, this.stepIdx);
   }
-  
 }

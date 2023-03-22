@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ArraySliderDataInterface } from '../dto/ArraySliderDataInterface';
-import { NameValidators } from '../form-field-validators/NameValidators';
-import { NumberValidators } from '../form-field-validators/NumberValidators';
-import { ArrayInteractionService } from '../services/array-interaction-service.service';
+import { ArraySliderDataInterface } from '../../dto/ArraySliderDataInterface';
+import { NameValidators } from '../../../form-field-validators/NameValidators';
+import { NumberValidators } from '../../../form-field-validators/NumberValidators';
+import { ArrayInteractionService } from '../../services/array-interaction-service.service';
+import { AbstractWorksSpaceComponent } from '../AbstractWorkspaceComponent';
+import { ComponentTypeEnum } from '../../enums/ComponentTypeEnum';
 
 interface ArrayControlI {
   maxSize: number
@@ -14,7 +16,7 @@ interface ArrayControlI {
   templateUrl: './array.component.html',
   styleUrls: ['./array.component.css']
 })
-export class ArrayComponent {
+export class ArrayComponent extends AbstractWorksSpaceComponent {
 
   // Controls for controlling array size
   minIdx: number = 0;
@@ -24,9 +26,6 @@ export class ArrayComponent {
   arraySizeForm: FormGroup;
   @Input() maxPaddingInBothSidesInPx = 0;
 
-  // Contols for managing multiple arrays
-  arrayNumber = 0;
-
   // Controls for adding and deleting loops
   showLoopVariableForm: boolean = false;
   loopVariableForm: FormGroup;
@@ -35,6 +34,7 @@ export class ArrayComponent {
   arraySliderList: ArraySliderDataInterface[] = [];
 
   constructor(private fb: FormBuilder, private ais: ArrayInteractionService) {
+    super(ComponentTypeEnum.ARRAY);
     this.initArrayWithDefaultValues();
     this.arraySizeForm = this.fb.group({
       maxSize: [this.maxIdx + 1, [Validators.required,
@@ -102,7 +102,7 @@ export class ArrayComponent {
         }
       } else if (newSize < oldSize) {
         this.arraySliderList = [];
-        this.ais.removeArrayDeletedCellValues(this.arrayNumber, this.maxIdx);
+        this.ais.removeArrayDeletedCellValues(this.getComponentRef(), this.maxIdx);
       }
     }
   }
@@ -164,6 +164,6 @@ export class ArrayComponent {
   }
 
   getUniqueArrayId() : string {
-    return `array-id-${this.arrayNumber}`;
+    return `${this.getComponentRef()}`;
   }
 }

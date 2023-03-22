@@ -66,8 +66,9 @@
     <!-- Show the local variables -->
     <div class="d-flex m-b-1rem">
         <div class="var-div m-r-1rem" *ngFor="let variable of variableList">
-            <span class="var-name">{{ variable.name }} = </span>
-            <input type="text" class="var-value m-r-0_5rem" [id]="variable.name" [(ngModel)]="variable.value">
+            <span>{{ variable.name }} = </span>
+            <input type="text" class="var-value m-r-0_5rem" [id]="variable.name" 
+                [(ngModel)]="variable.value">
             <button class="icon" (click)="deleteVariable(variable)">
                 <fa-icon icon="trash" class="delete-icon"></fa-icon>
             </button>
