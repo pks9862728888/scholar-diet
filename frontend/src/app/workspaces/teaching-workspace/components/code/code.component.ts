@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentTypeEnum } from '../../enums/ComponentTypeEnum';
-import { AbstractWorksSpaceComponent } from '../AbstractWorkspaceComponent';
+import { AbstractWorksSpaceComponent } from '../../../AbstractWorkspaceComponent';
 
 @Component({
   selector: 'app-code',

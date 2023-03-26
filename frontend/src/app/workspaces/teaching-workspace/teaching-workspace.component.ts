@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentTypeEnum } from './enums/ComponentTypeEnum';
-import { WorkspaceComponentI } from './dto/WorkspaceComponentI';
+import { WorkspaceComponentI } from '../dto/WorkspaceComponentI';
 
 @Component({
   selector: 'app-teaching-workspace',

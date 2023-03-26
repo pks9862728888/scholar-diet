@@ -1,4 +1,4 @@
-import { ComponentTypeEnum } from "../enums/ComponentTypeEnum";
+import { ComponentTypeEnum } from "../teaching-workspace/enums/ComponentTypeEnum";
 
 export interface WorkspaceComponentI {
     type: ComponentTypeEnum,

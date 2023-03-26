@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NameValidators } from 'src/app/form-field-validators/NameValidators';
-import { VariableI } from '../../dto/VariableI';
-import { ComponentTypeEnum } from '../../enums/ComponentTypeEnum';
-import { AbstractWorksSpaceComponent } from '../AbstractWorkspaceComponent';
+import { NameValidators } from 'src/app/validators/form-field-validators/NameValidators';
+import { VariableI } from 'src/app/shared/dto/VariableI';
+import { ComponentTypeEnum } from 'src/app/workspaces/teaching-workspace/enums/ComponentTypeEnum';
+import { AbstractWorksSpaceComponent } from '../../workspaces/AbstractWorkspaceComponent';
+
 
 @Component({
   selector: 'app-map',
