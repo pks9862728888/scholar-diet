@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TeachingWorkspaceComponent } from './teaching-workspace/teaching-workspace.component';
+import { TeachingWorkspaceComponent } from './workspaces/teaching-workspace/teaching-workspace.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'teaching-workspace', pathMatch: 'full'},

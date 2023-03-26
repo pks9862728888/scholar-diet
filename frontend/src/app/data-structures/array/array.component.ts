@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ArraySliderDataInterface } from '../../dto/ArraySliderDataInterface';
-import { NameValidators } from '../../../form-field-validators/NameValidators';
-import { NumberValidators } from '../../../form-field-validators/NumberValidators';
-import { ArrayInteractionService } from '../../services/array-interaction-service.service';
-import { AbstractWorksSpaceComponent } from '../AbstractWorkspaceComponent';
-import { ComponentTypeEnum } from '../../enums/ComponentTypeEnum';
+import { NameValidators } from 'src/app/validators/form-field-validators/NameValidators';
+import { NumberValidators } from 'src/app/validators/form-field-validators/NumberValidators';
+import { ArraySliderDataInterface } from 'src/app/data-structures/array/dto/ArraySliderDataInterface';
+import { ComponentTypeEnum } from 'src/app/workspaces/teaching-workspace/enums/ComponentTypeEnum';
+import { ArrayInteractionService } from 'src/app/data-structures/array/services/array-interaction-service.service';
+import { AbstractWorksSpaceComponent } from '../../workspaces/AbstractWorkspaceComponent';
 
 interface ArrayControlI {
   maxSize: number

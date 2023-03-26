@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, Input, Output } from "@angular/core";
-import { WorkspaceComponentI } from "../dto/WorkspaceComponentI";
-import { ComponentTypeEnum } from "../enums/ComponentTypeEnum";
+import { WorkspaceComponentI } from "./dto/WorkspaceComponentI";
+import { ComponentTypeEnum } from "./teaching-workspace/enums/ComponentTypeEnum";
 
 
 @Directive()
