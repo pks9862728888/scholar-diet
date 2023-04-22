@@ -26,3 +26,12 @@
     color: #ffffff;
     text-shadow: 1px 1px #112e00;
 }
+
+.logo {
+    width: 30px;
+    height: 30px;
+}
+
+.logo-text {
+    transform: translate(-5px, 0.5px);
+}
